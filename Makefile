@@ -1,14 +1,14 @@
-CC = gcc
-CCFLAGS = -Wall -g
+EXEC = 8080.out
+SOURCES = $(wildcard src/*.c)
+OBJECTS = $(SOURCES:.c=.o)
+flags = -g
 
+$(EXEC): $(OBJECTS)
+	gcc $(OBJECTS) $(flags) -o $(EXEC)
 
-run:
-	clear
-	./8080
+%.o: %.c include/%.h
+	gcc -c $(flags) $< -o $@
 
-
-build: 8080.c
-	$(CC) 8080.c $(CCFLAGS) -o 8080
-
-
-	
+clean:
+	-rm *.out
+	-rm *.o
